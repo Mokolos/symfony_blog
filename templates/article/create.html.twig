@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme articleForm 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+    {% if editMode %}
+        <h1>Modification de l'article</h1>
+    {% else %}
+        <h1>Creation d'un Article!</h1>
+    {% endif %}
+
+    {{ form_start(articleForm) }}
+        {{ form_row(articleForm.title, {'attr': {'placeholder': "titre de l'article"}}) }}
+        {{ form_row(articleForm.author)}}
+        {{ form_row(articleForm.text, {'attr': {'placeholder': "contenue de l'article"}}) }}
+        <button class="btn btn-success">
+            {% if editMode %}
+                Enregistrer les modification
+            {% else %}
+                Ajouter l'article
+            {% endif %}
+        </button>
+    {{ form_end(articleForm) }}
+{% endblock %}

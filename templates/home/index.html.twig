@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="articles">
+        {% if not articles %}
+            <p>Aucun article ...</p>
+        {% endif %}
+        {% for article in articles %}
+            <article>
+                <h2>{{ article.title }}</h2> ecrit par <h3>{{ article.author.name }}</h3>
+            </article>
+            <p>{{ article.text }}</p>
+            <div class="metadata">
+                Ecrit le {{ article.createdAt | date('d/m/y')}} à {{ article.createdAt | date('H:i')}}
+            </div>
+            {% if article.updatedAt %}
+                <div class="metadata">
+                    Modifier  le {{ article.updatedAt | date('d/m/y')}} à {{ article.updatedAt | date('H:i')}}
+                </div>
+            {% endif %}
+            <div>
+                <a href="{{path('article_show', {'id': article.id})}}" class="btn btn-primary">show article</a>
+                <a href="{{path('article_edit', {'id': article.id})}}" class="btn btn-success">Edit un Article</a>
+            </div>
+        {% endfor %}
+    </section>
+{% endblock %}
